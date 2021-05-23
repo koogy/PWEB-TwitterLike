@@ -106,14 +106,35 @@ app.post('/retweetMessage', (req, res) => {
   );
 })
 
+app.post('/delete_retweetMessage', (req, res) => {
+  console.log("Delete Retweet message " + req.body.messageID + " user : " + req.body.user_id)
+   pool.query(
+    `delete from retweet where message_id = $1 and user_id=$2`,
+    [req.body.messageID, req.body.user_id],
+    (err, results) => {
+      if (err) {
+        console.log(err);
+      }
+
+      res.status(200).send()
+    }
+  ); 
+})
+
 app.post('/getMessage', (req, res) => {
-  console.log("Fetching messages...")
+/*   console.log("Fetching messages...") */
   var mentionFilter = req.body.mentionFilter
   var hashtagFilter = req.body.hashtagFilter
   var followFilter = req.body.followFilter
-  console.log(mentionFilter)
+  var myPostFilter = req.body.MyPostFilter
+  var userFilter = req.body.userFilter
+  var limitPost = req.body.limitPost
+
+  console.log(req.body)
+ /*console.log(mentionFilter)
+
   console.log(hashtagFilter)
-  console.log(followFilter)
+  console.log(followFilter) */
   
  
 var query =`
@@ -197,9 +218,15 @@ WHERE message_id != -1
   if(followFilter){
       console.log("FOLLLOW FILTER !!")
       query += " AND ((select count(followed) AS followed FROM follow WHERE followed ='t' AND user_id= $1 AND usertofollow_id = bigboi.user_id group by followed)) =1"
-    }
+  }
+
+  if(myPostFilter){
+      query +=" AND (user_id = $1)"
+  } else if(userFilter){
+    query +=" AND (username = '" + userFilter +"')"
+  }
   
-    query += ' ORDER BY message_date DESC LIMIT 10' 
+    query += ' ORDER BY message_date DESC LIMIT ' + limitPost 
  
   pool.query(
     query,
