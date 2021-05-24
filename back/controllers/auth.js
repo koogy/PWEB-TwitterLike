@@ -26,15 +26,18 @@ const signIn = (req, res) => {
               name : user.name,
               id : user.id
           }
-/*           console.log(req.session.username)
-          console.log(req.session.user_id)
-          console.log(req.session.isAuth) */
+          console.log("[USER] SIGN IN ")
           res.status(200).send({user})
+        } else {
+          console.log("[USER] ACCESS REFUSED ")
+          req.session.isAuth = false;
+          res.status(400).send({message: "Sign in  : error"})
         }
       } else {
-        console.log("im here")
-        res.status(400).send({message: "Sign in  : error"})
-      }
+          console.log("[USER] ACCESS REFUSED ")
+          req.session.isAuth = false;
+          res.status(400).send({message: "Sign in  : error"})
+        }
     }
   );
  
@@ -44,6 +47,7 @@ const signIn = (req, res) => {
 const signOut = (req, res) => {
   req.session.destroy((err) => {
     if (err) throw err;
+    console.log("[USER] SIGN OUT ")
   });
 };
 

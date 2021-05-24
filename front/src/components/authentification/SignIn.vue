@@ -25,8 +25,6 @@ export default {
   },
   methods: {
      async submit(){
-        console.log('submitted')
-     
         axios.post('/signIn',this.form)
         .then(res => {
             console.log(res.data)

@@ -341,16 +341,7 @@ export default {
       }
     },
     set_everyone(data){ 
-      console.log("hohoho : " + data)
-      if(this.filterEveryone != false && data == false){
-        this.filterEveryone = data
-
-      }
-
-      if(this.filterEveryone == false && data == true){
-        this.filterEveryone = data
-      }
-      setTimeout(this.displayMessage(),1000);
+   
 
     }
     ,
@@ -363,7 +354,7 @@ export default {
       var userFilter = this.userFilter.trim();
       var limitPost = this.limitPost;
 
-      if (this.filterEveryone || !this.auth) {
+      if (this.filterEveryone) {
         mentionFilter.push("@everyone");
       }
 

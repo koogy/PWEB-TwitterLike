@@ -62,7 +62,7 @@ export default {
       } else {
         (this.username = data.user.name), (this.user_id = data.user.id);
         this.auth = true;
-        this.$refs.itsatest.set_everyone(false) 
+        this.$refs.itsatest.displayMessage() 
 
       }
 
