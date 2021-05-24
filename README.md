@@ -10,7 +10,7 @@
 
 Pré-requis :
 
-- Initialiser la base de données PSQL avec ( ./back/database.sql )
+- Initialiser la base de données PSQL avec le fichier ( ./back/database.sql )
 - Faire les modications nécessaire pour se connecter à la base de donnée dans le fichier .env (nom de la database : mypwebly)
 - cd back
 - npm install
