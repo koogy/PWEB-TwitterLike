@@ -9,5 +9,5 @@
 
 ### Execution
 ```
-npm start ou npm run dev 
+npm start 
 ```
