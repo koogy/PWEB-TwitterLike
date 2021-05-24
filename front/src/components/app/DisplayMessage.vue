@@ -156,7 +156,6 @@
                     a retweeté
                   </div>
                   <!-- AVATAR -->
-<!-- img src="../../../src/assets/avatar/alex.png" -->
                   <img :src="require(`../../../src/assets/avatar/${message.username}.png`)"
                     contain
                     height="35px"
