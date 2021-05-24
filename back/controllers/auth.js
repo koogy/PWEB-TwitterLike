@@ -1,7 +1,6 @@
 const { pool } = require("../dbConfig");
 
 const signIn = (req, res) => {
-  console.log("Hello")
   var { username, password } = req.body;
  
   pool.query(
@@ -43,7 +42,6 @@ const signIn = (req, res) => {
 
 
 const signOut = (req, res) => {
-  console.log("hello")
   req.session.destroy((err) => {
     if (err) throw err;
   });

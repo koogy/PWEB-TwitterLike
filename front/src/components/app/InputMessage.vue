@@ -3,10 +3,18 @@
     <div>
       <div>
         <form @submit.prevent="submitMessage">
-          <textarea placeholder="Quoi de neuf ?" v-model="content"></textarea>
-          <div>
+          <div class ="input">
+          <textarea id="inputMessage" placeholder="Quoi de neuf ?" v-model="content"></textarea>
+          </div>
+
+          <div class ="input-information">
+            <div>
             <p>{{ getMessageLength }} caractères restants</p>
+            </div>
+            <div>
             <button :disabled="!canSubmit">Twotter !</button>
+
+            </div>
           </div>
         </form>
       </div>
@@ -49,3 +57,22 @@ export default {
   },
 };
 </script>
+
+<style>
+textarea {
+  width: 250px;
+  height: 85px;
+  resize: none;
+  outline: none;
+}
+
+
+p{
+  margin:0;
+  margin-left:50;
+}
+
+.input-information{
+  display:inline-block
+}
+</style>

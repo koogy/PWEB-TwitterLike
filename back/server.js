@@ -130,7 +130,7 @@ app.post('/getMessage', (req, res) => {
   var userFilter = req.body.userFilter
   var limitPost = req.body.limitPost
 
-  console.log(req.body)
+
  /*console.log(mentionFilter)
 
   console.log(hashtagFilter)

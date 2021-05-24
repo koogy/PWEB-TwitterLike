@@ -1,9 +1,7 @@
 <template>
   <form @submit.prevent="submit">
-            <div>
-          <button type ="submit">Sign Out</button>
-      </div>
-</form>
+          <button type ="submit">X</button>
+    </form>
 </template>
 
 <script>
