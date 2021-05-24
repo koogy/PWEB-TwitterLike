@@ -20,7 +20,7 @@
           </div>
 
           <div class="container2">
-            <img
+            <img v-show="canSubmit"
               src="../../../src/assets/submit.png"
               contain
               height="50px"
@@ -36,6 +36,7 @@
 
 <script>
 import axios from "axios";
+import $ from "jquery";
 export default {
   name: "InputMessage",
   data() {
@@ -48,8 +49,10 @@ export default {
   methods: {
     submitMessage() {
       var currentDate = new Date().toLocaleString();
-      console.log(currentDate);
-      axios.post("/postMessage", {
+
+      console.log("length : " + this.content.length)
+      if(this.content.length >0){
+        axios.post("/postMessage", {
         message_content: this.content,
         date: currentDate,
         user_id: this.user_id,
@@ -57,6 +60,7 @@ export default {
 
       this.$root.$emit("displayMessage");
       this.content = "";
+      }
     },
   },
   computed: {

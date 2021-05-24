@@ -218,7 +218,7 @@
         <button v-if="messages.length > 10" @click="decrease_display_size()">
           Show less
         </button>
-        <button  @click="increase_display_size()">Show more</button>
+        <button v-if="auth" @click="increase_display_size()">Show more</button>
       </div>
     </div>
   </div>
