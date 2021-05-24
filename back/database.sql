@@ -1,3 +1,7 @@
+
+CREATE DATABASE mypwebly;
+\connect mypwebly;
+
 CREATE TABLE "session" (
   "sid" varchar NOT NULL COLLATE "default",
 	"sess" json NOT NULL,
