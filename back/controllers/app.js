@@ -103,6 +103,8 @@ const post_message = (req, res) =>  {
     var myPostFilter = req.body.MyPostFilter
     var userFilter = req.body.userFilter
     var limitPost = req.body.limitPost
+
+    console.log(req.body)
   
     if (typeof req.session.isAuth === 'undefined' || req.session.isAuth === false) {
       mentionFilter = ['@everyone']
