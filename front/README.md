@@ -9,5 +9,5 @@ npm install
 ```
 npm run serve
 ou
-npm run start
+npm start
 ```
