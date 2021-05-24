@@ -10,6 +10,7 @@
   "dependencies": {
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
+    "jquery": "^3.6.0",
     "vue": "^2.6.11"
   },
   "devDependencies": {
@@ -21,7 +22,7 @@
     "eslint-plugin-vue": "^6.2.2",
     "vue-template-compiler": "^2.6.11"
   },
-  "eslintConfig": { 
+  "eslintConfig": {
     "root": true,
     "env": {
       "node": true
@@ -33,7 +34,9 @@
     "parserOptions": {
       "parser": "babel-eslint"
     },
-    "rules": {"no-unused-vars": "off" }
+    "rules": {
+      "no-unused-vars": "off"
+    }
   },
   "browserslist": [
     "> 1%",

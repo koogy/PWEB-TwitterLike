@@ -29,6 +29,7 @@ app.post('/postMessage',appRoutes);
 app.post('/deleteMessage',appRoutes);
 app.post('/likeMessage',appRoutes);
 app.post('/getMessage',appRoutes);
+app.post('/followUser',appRoutes);
 
 app.post('/retweetMessage',appRoutes);
 app.post('/delete_retweetMessage',appRoutes);

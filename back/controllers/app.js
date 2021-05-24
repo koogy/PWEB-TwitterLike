@@ -48,6 +48,24 @@ const post_message = (req, res) =>  {
     );
   }
 
+  const followUser = (req, res) => {
+
+    console.log("Follow user..." + req.body.follow.userid + " "+ req.body.follow.userToFollow_id)
+    res.send("haha")
+    pool.query(
+      `insert into follow(user_id,userToFollow_id,followed) values($1,$2,'true') on CONFLICT(user_id,userToFollow_id) DO UPDATE SET followed = NOT follow.followed`,
+      [req.body.follow.userid , req.body.follow.userToFollow_id],
+      (err, results) => {
+        if (err) {
+          console.log(err);
+  
+        }
+  
+        res.status(200).send()
+      }
+    );
+  }
+  
 
   const retweetMessage = (req, res)=> {
     console.log("Retweet message" + req.body.messageID + " FROM user : " + req.body.user_id)
@@ -201,6 +219,7 @@ const post_message = (req, res) =>  {
       getMessage,
       deleteMessage,
       retweetMessage,
-      delete_retweetMessage
+      delete_retweetMessage,
+      followUser
       
   };

@@ -2,21 +2,34 @@
   <div>
     <div>
       <div>
-        <form @submit.prevent="submitMessage">
-          <div class ="input">
-          <textarea id="inputMessage" placeholder="Quoi de neuf ?" v-model="content"></textarea>
+          <div class="input">
+            <textarea
+              id="inputMessage"
+              placeholder="Quoi de neuf ?"
+              v-model="content"
+            ></textarea>
           </div>
 
-          <div class ="input-information">
-            <div>
-            <p>{{ getMessageLength }} caractères restants</p>
+          <div class="input-information">
+            <div class="container1">
+              <p id="charleft">{{ getMessageLength }} caractères restants</p>
             </div>
             <div>
-            <button :disabled="!canSubmit">Twotter !</button>
+              <br />
+              <br />
+            </div>
 
+            <div class="container2">
+              <img
+                src="../../../src/assets/submit.png"
+                contain
+                height="50px"
+                width="50px"
+                @click="submitMessage"
+              />
             </div>
           </div>
-        </form>
+  
       </div>
     </div>
   </div>
@@ -36,14 +49,15 @@ export default {
   methods: {
     submitMessage() {
       var currentDate = new Date().toLocaleString();
-      console.log(currentDate)
+      console.log(currentDate);
       axios.post("/postMessage", {
         message_content: this.content,
         date: currentDate,
-        user_id : this.user_id
+        user_id: this.user_id,
       });
 
       this.$root.$emit("displayMessage");
+      this.content =""
     },
   },
   computed: {
@@ -66,13 +80,26 @@ textarea {
   outline: none;
 }
 
-
-p{
-  margin:0;
-  margin-left:50;
+p {
+  margin: 0;
+  margin-left: 50;
 }
 
-.input-information{
-  display:inline-block
+.input-information {
+  display: flex;
+  flex-direction: row;
+}
+
+.container2 {
+  margin-left: 50px;
+}
+
+#inputMessage{
+  border:2px solid #2c3e50;
+  padding:5px;
+}
+
+#charleft{
+  font-size:15px;
 }
 </style>

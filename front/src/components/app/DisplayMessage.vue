@@ -9,7 +9,7 @@
             v-on:change="displayMessage"
             :disabled="!auth"
           />
-          <label for="checkbox"> @everyone </label>
+          <label for="checkbox"> @EVERYONE </label>
         </div>
 
         <div class="test">
@@ -19,7 +19,7 @@
             v-on:change="displayMessage"
             :disabled="!auth"
           />
-          <label for="checkbox"> @me </label>
+          <label for="checkbox"> @ME </label>
         </div>
 
         <div class="test">
@@ -29,7 +29,7 @@
             v-on:change="displayMessage"
             :disabled="!auth"
           />
-          <label for="checkbox"> My post </label>
+          <label for="checkbox"> MY POSTS </label>
         </div>
         <div class="test">
           <input
@@ -38,16 +38,14 @@
             v-on:change="displayMessage"
             :disabled="!auth"
           />
-          <label for="checkbox"> Followed </label>
+          <label for="checkbox"> FOLLOWING </label>
         </div>
 
         <div class="test">
           <input
             type="text"
-            id="3"
-            value="3"
             v-model="filterHashtag"
-            placeholder="Search #"
+            placeholder="SEARCH HASHTAG"
             v-on:input="displayMessage"
             :disabled="!auth"
           />
@@ -56,10 +54,8 @@
         <div class="test">
           <input
             type="text"
-            id="3"
-            value="3"
             v-model="userFilter"
-            placeholder="Search User @"
+            placeholder="SEARCH USER"
             v-on:input="displayMessage"
             :disabled="!auth"
           />
@@ -78,26 +74,26 @@
 
       <div class="display-post">
         <div class="post">
-          <div v-for="message in messages" v-bind:key="message.id">
+          <div v-for="message in messages" v-bind:key="message.id" class="itsamessage">
             <!-- PARTIE TWEET -->
 
-            <div v-if="message.retweet_user_id == null">
+            <div class="message-body" v-if="message.retweet_user_id == null">
               <div class="Message">
                 <div class="Message-information">
-                  <img
-                    :src="'https://www.shareicon.net/data/128x128/2016/05/24/770117_people_512x512.png'"
+                  <img :src="require(`../../../src/assets/avatar/${message.username}.png`)"
                     contain
-                    height="20px"
-                    width="20px"
+                    height="35px"
+                    width="35px"
                   />
-                  <a>{{ message.username }}</a>
-                  <div>
+                  <a> @{{ message.username }}</a>
+                  <div class="date">
                     {{
                       new Date(message.message_date)
                         .toLocaleString()
-                        .replace(/,/g, " -")
+                        .replace(/,/g, "  -")
                     }}
                   </div>
+                
                 </div>
 
                 <div class="Message-content"></div>
@@ -106,32 +102,40 @@
               <div></div>
               <section></section>
 
-              <div>{{ message.message_content }}</div>
+              <div class="messagecontent">{{ message.message_content }}</div>
 
               <button
+                class="functions"
                 v-if="message.username == username"
                 @click="deleteMessage(message.message_id)"
               >
-                Delete
+                ❌
               </button>
 
               <button
+                class="functions"
                 v-if="auth"
                 @click="likeMessage(message.message_id, user_id)"
               >
-                Like {{ message.liked }}
+                ❤️ {{ message.liked }}
               </button>
               <button
+                class="functions"
                 v-if="auth"
                 @click="retweetMessage(message.message_id, user_id)"
               >
-                Retweet
+                <img
+                  src="../../../src/assets/retweet.png"
+                  contain
+                  height="15px"
+                  width="15px"
+                />
               </button>
-              <button
+              <button class="functions"
                 v-if="auth && message.user_id != user_id"
                 @click="followUser(message.user_id)"
               >
-                Follow {{ message.follow }}
+                👫 {{ message.follow }}
               </button>
               <br />
               <br />
@@ -139,7 +143,7 @@
 
             <!-- PARTIE RETWEET -->
 
-            <div v-if="message.retweet_user_id != null">
+            <div class="message-body" v-if="message.retweet_user_id != null">
               <div class="Message">
                 <div class="Message-information">
                   <!-- WHO RETWEETED ? -->
@@ -152,60 +156,70 @@
                     a retweeté
                   </div>
                   <!-- AVATAR -->
-
-                  <img
-                    :src="'https://www.shareicon.net/data/128x128/2016/05/24/770117_people_512x512.png'"
+<!-- img src="../../../src/assets/avatar/alex.png" -->
+                  <img :src="require(`../../../src/assets/avatar/${message.username}.png`)"
                     contain
-                    height="20px"
-                    width="20px"
+                    height="35px"
+                    width="35px"
                   />
                   <!-- WHO WROTE THE MESSAGE -->
                   <a> @{{ message.username }} </a>
 
                   <!-- DATE -->
-                  {{
+                  <div class="date">{{
                     new Date(message.message_date)
                       .toLocaleString()
                       .replace(/,/g, " -")
-                  }}
+                  }}</div>
+                  
                 </div>
                 <div class="Message-content">{{ message.message_content }}</div>
                 <div class="Message-functions">
-                  <button
+                  <button class="functions"
                     v-if="message.username == username"
                     @click="deleteMessage(message.message_id)"
                   >
-                    Delete
+                    ❌
                   </button>
 
-                  <button
+                  <button class="functions"
                     v-if="auth"
                     @click="likeMessage(message.message_id, user_id)"
                   >
-                    Like {{ message.liked }}
+                    ❤️ {{ message.liked }}
                   </button>
-                  <button
+                  <button 
+                    class="functions"
                     v-if="message.retweet_user_id == user_id"
                     @click="delete_retweetMessage(message.message_id, user_id)"
                   >
-                    DeTweet
+                    <img
+                      src="../../../src/assets/detweet.png"
+                      contain
+                      height="16px"
+                      width="16px"
+                    />
                   </button>
-                  <button
+                  <button class="functions"
                     v-if="auth && message.user_id != user_id"
                     @click="followUser(message.user_id)"
                   >
-                    Follow {{ message.follow }}
+                    🧑‍🤝‍🧑 {{ message.follow }}
                   </button>
                 </div>
               </div>
 
               <br />
+
+              <div id="border-bottom"></div>
             </div>
           </div>
         </div>
 
-             <button v-if="messages.length > 10" @click="decrease_display_size()">Show less</button>
-             <button @click="increase_display_size()">Show more</button>
+        <button v-if="messages.length > 10" @click="decrease_display_size()">
+          Show less
+        </button>
+        <button v-if="messages.length > 10" @click="increase_display_size()">Show more</button>
       </div>
     </div>
   </div>
@@ -341,12 +355,7 @@ export default {
         this.displayMessage();
       }
     },
-    set_everyone(data){ 
-   
-
-    }
-    ,
-   
+    set_everyone(data) {},
     displayMessage() {
       var mentionFilter = [];
       var hashtagFilter = [];
@@ -422,13 +431,18 @@ export default {
 .container .filter {
   flex: 0 0 40%;
   justify-content: flex-end;
+  border-right: 2px solid #2c3e50;
+  margin-right: 20px;
+
+  margin-left:auto;
+    margin-right:auto;
 }
 
 .container .filter .filter-container {
   display: flex;
   flex-direction: column;
   float: right;
-  margin-right: 50px;
+  margin-right: 30px;
 }
 
 .container .filter .filter-container .test {
@@ -439,7 +453,10 @@ export default {
   display: flex;
   flex: 1;
   flex-direction: column;
+  margin-left:30px;
 }
+
+
 
 .body .header {
   height: 200px;
@@ -447,5 +464,36 @@ export default {
 
 .body .display-post {
   height: 100%;
+}
+
+.message-body {
+  width: 30%;
+  border-bottom: 2px solid #2c3e50;
+  margin-bottom: 20px;
+}
+
+.functions {
+  width: 50px;
+  height: 25px;
+}
+
+.date{
+  margin-bottom:10px;
+  font-size:14px;
+  font-style: italic;
+  margin-left:195px;
+}
+
+.functions{
+  margin-top:10px;
+}
+
+.itsamessage{
+  width:900px;
+
+}
+
+.messagecontent{
+   word-wrap: break-word;
 }
 </style>

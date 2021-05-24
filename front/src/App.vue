@@ -3,10 +3,11 @@
   <div id="app">
     <header id="header">
       <div class="header-content">
-        <div id="welcome"><h1 v-if="auth">Hello {{ username }} ! </h1></div>
-        <div id="signout"><SignOut v-if="auth == true" @update="authentificate" /></div>
+        <div id="welcome"><h1 v-if="auth">Hello {{ username }}  </h1></div>
+        <div id="signout"><SignOut v-if="auth == true" @update="authentificate" />
+        </div>
       
-        <SignIn v-if="auth == false" @update="authentificate" />
+        <SignIn v-if="auth == false" :auth="auth"  @update="authentificate" />
 
       
       </div>
@@ -76,10 +77,18 @@ export default {
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   color: #2c3e50;
-
   /* text-align: center;
 
   margin-top: 20px; */
+
+
+    margin-left:auto;
+    margin-right:auto;
+    width:960px;
+}
+
+h1{
+  border-bottom: 4px solid #2c3e50;
 }
 
 .header-content {
