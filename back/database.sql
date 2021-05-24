@@ -54,6 +54,6 @@ CREATE TABLE retweet(
 
 
 insert into users(name,password) values ('alex','azer');
-insert into users(name,password) values ('bob','azer');
+insert into users(name,password) values ('bob','azer'); 
 insert into users(name,password) values ('patrick','azer');
 insert into users(name,password) values ('snoopy','azer');

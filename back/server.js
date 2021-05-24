@@ -5,6 +5,7 @@ const { pool } = require("./dbConfig");
 
 const app = express()
 const port = 3030
+
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(
